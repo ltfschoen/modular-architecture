@@ -12,10 +12,12 @@ import PlainOldFeatureModule
 
 extension AppDelegate {
     func configureRouting() {
+        print("AppDelegate+Routing: Configuring Routing")
         registerModuleURLs()
         
         // Register Host App
         if let window = window {
+            print("AppDelegate+Routing: Registering AppFlowController with Shared Module Router")
             let applicationFlowController = ApplicationFlowController(window: window)
             SharedModuleRouter.registerHostApp(applicationFlowController)
             appFlowController = applicationFlowController
@@ -23,6 +25,7 @@ extension AppDelegate {
     }
     
     func registerModuleURLs() {
+        print("AppDelegate+Routing: Registering Module URLs of VCs with Shared Module Router")
         SharedModuleRouter.registerModuleClass(HomeModuleViewController.self, URLPath: ModuleURL.HomeModuleURL.path)
         SharedModuleRouter.registerModuleClass(PlainOldFeatureModuleViewController.self, URLPath: ModuleURL.PlainOldFeatureModuleURL(featureUUID: "").routingPath)
     }

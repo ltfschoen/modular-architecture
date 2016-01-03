@@ -8,10 +8,12 @@
 import Foundation
 import ModularFoundation
 
+
 @objc class ApplicationFlowController: NSObject, ModuleURLObserver {
     let rootViewController: UINavigationController
 
     init(window: UIWindow) {
+        print("ApplicationFlowController: Launching HomeModuleURL")
         let launchModuleURL = ModuleURL.HomeModuleURL
         if let homeViewController = SharedModuleRouter.moduleForURLPath(launchModuleURL.path) {
             let mainNavigationController = UINavigationController(rootViewController: homeViewController)
@@ -26,12 +28,14 @@ import ModularFoundation
     }
     
     func registerAsHost() {
+        print("ApplicationFlowController: Registering as Host App")
         SharedModuleRouter.registerHostApp(self)
     }
     
     internal func handleModuleURL(moduleURL: ModuleURL, successCallback: ModuleURL? = nil, failureCallback: ModuleURL? = nil) -> Bool {
         switch moduleURL {
         case .HomeModuleURL:
+            print("ApplicationFlowController: Handling HomeModuleURL")
             if let homeViewController = SharedModuleRouter.moduleForURLPath(moduleURL.path) {
                 rootViewController.popToRootViewControllerAnimated(true)
                 rootViewController.pushViewController(homeViewController, animated: false)
@@ -40,6 +44,7 @@ import ModularFoundation
             return true
             
         case .PlainOldFeatureModuleURL(let featureUUID):
+            print("ApplicationFlowController: Handling PlainOldFeatureModuleURL")
             if let nextModuleViewController = SharedModuleRouter.moduleForURLPath(moduleURL.routingPath) {
                 rootViewController.pushViewController(nextModuleViewController, animated: true)
                 nextModuleViewController.handleModuleURL(moduleURL)

@@ -9,4 +9,4 @@ This architecture strives to encapsulate and bound our features to reduce comple
 * Make testing individual features a bounded task
 
 
-In the example each feature is encapsilated within a dynamic framework. A module router is used for inter-feature communication and the modified version of VIPER used within each feature.
+In the example each feature is encapsulated within a dynamic framework. A module router is used for inter-feature communication and the modified version of VIPER used within each feature.
